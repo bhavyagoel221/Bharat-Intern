@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Wizard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Temperature Wizard - A Temperature Converter </h1>
+        <div class="temp-container">
+            <label for="Celcius">Celcius</label>
+            <input 
+            onchange ="computeTemp(event)"
+            type="number" 
+            name="Celcius" 
+            id="Celcius" 
+            class="Celcius" 
+            placeholder="Enter Temperature in Celcius"/>    
+        </div>
+        <div class="temp-container">
+            <label for="fahre">Fahrenheit</label>
+            <input 
+            onchange="computeTemp(event)"
+            type="number" 
+            name="Fahrenheit" 
+            id="Fahrenheit" 
+            class="Fahrenheit" 
+            placeholder="Enter Temperature in Fahrenheit"/>    
+        </div>
+        <div class="temp-container">
+            <label for="Kelvin">Kelvin</label>
+            <input 
+            onchange="computeTemp(event)"
+            type="number" 
+            name="Kelvin" 
+            id="Kelvin" 
+            class="Kelvin" 
+            placeholder="Enter Temperature in Kelvin"/>    
+        </div>
+    </div>
+    
+    
+    <script src="./script.js"></script>
+</body>
+</html>
+
+<style>
+    body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(90deg, white 0%, rgba(245, 240, 242, 1) 100%, white 100%);
+    font-family: monospace, sans-serif;
+    color: rgb(99, 16, 16);
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 4px 10px rgba(0, 0, 0, 0.3);
+    width: 85%;
+    max-width: 800px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heading {
+    font-size: 32px;
+}
+
+.temp-container {
+    width: 100%;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+input {
+    width: 60%;
+    font-family: monospace;
+    padding: 5px;
+    outline: none;
+    background: white;
+    border-color: black;
+    color: black;
+    font-size: 18px;
+}
+
+input::placeholder {
+    color:black;
+}
+
+@media (min-width: 600px) {
+    .container {
+        width: 70%;
+    }
+
+    input {
+        width: 50%;
+    }
+}
+
+@media (min-width: 900px) {
+    .container {
+        width: 60%;
+    }
+
+    input {
+        width: 40%;
+    }
+}
+</style>
+
+<script>
+    const celciusEl = document.getElementById("Celcius");
+const fahrenheitEl = document.getElementById("Fahrenheit");
+const kelvinEl = document.getElementById("Kelvin");
+
+function computeTemp(event) {
+    const currentValue = event.target.value;
+
+    switch (event.target.name) {
+        case "Celcius":
+            fahrenheitEl.value = (currentValue * 9 / 5) + 32;
+            kelvinEl.value = parseFloat(currentValue) + 273.15;
+            break;
+
+        case "Fahrenheit":
+            celciusEl.value = (currentValue - 32) * 5 / 9;
+            kelvinEl.value = (currentValue - 32) * 5 / 9 + 273.15;
+            break;
+
+        case "Kelvin":
+            celciusEl.value = currentValue - 273.15;
+            fahrenheitEl.value = (currentValue - 273.15) * 9 / 5 + 32;
+            break;
+
+        default:
+            break;
+    }
+}
+</script>
